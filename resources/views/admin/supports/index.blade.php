@@ -7,16 +7,20 @@
         <th>Descrição</th>
     </thead>
     <tbody>
-        @foreach ($supports as $support)
+        @foreach ($supports->items() as $support)
             <tr>
                 <td>{{$support->subject }}</td>
-                <td>{{$support->status }}</td>
+                <td>{{ getStatusSupport($support->status) }}</td>
                 <td>{{$support->body }}</td>
                 <td>
-                    <a href="{{ route('supports.show', $support->id )}}"><b>+</b></a>
-                    <a href="{{ route('supports.edit', $support->id )}}"><b>Editar</b></a>
+                    <a href="{{ route('supports.show', $support->id)}}"><b>+</b></a>
+                    <a href="{{ route('supports.edit', $support->id)}}"><b>Editar</b></a>
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
+<x-pagination :paginator="$supports"
+              :appends="$filters"
+/>
