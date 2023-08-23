@@ -1,4 +1,13 @@
-<h1>Listagem dos suportes</h1>
+@extends('admin.layouts.app')
+
+@section('title', 'Forum')
+
+@section('header')
+@include('admin.supports.partials.header', compact('supports'))
+@endsection
+
+@section('content')
+
 <a href="{{ route('supports.create')}}">Nova dúvida</a>
 <table>
     <thead>
@@ -24,3 +33,5 @@
 <x-pagination :paginator="$supports"
               :appends="$filters"
 />
+
+@endsection

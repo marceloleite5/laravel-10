@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUpdateSupportRequest extends FormRequest
 {
@@ -30,13 +31,14 @@ class StoreUpdateSupportRequest extends FormRequest
             ],
         ];
 
-        if ($this->method() === 'PUT') {
+        if ($this->method() === 'PUT' || $this->method() === 'PATCH' ) {
+
             $rules['subject'] = [
-                'required',
+                'required', // 'nullable',
                 'min:3',
                 'max:255',
-                "unique:supports,subject,{$this->id},id",
-               // Rule::unique('supports')->ignore($this->id),
+                //"unique:supports,subject,{$this->id},id",
+               Rule::unique('supports')->ignore($id = $this->support ?? $this->id),
             ];
         }
 
